@@ -59,7 +59,7 @@ client.on('ready', () => {
 });
 
 client.on('messageCreate', (message) => {
-    if (message.author == client.user || message.author.bot) return;
+    if (message.author === client.user || message.author.bot) return;
     
     const roleMentions = message.mentions.roles;
 

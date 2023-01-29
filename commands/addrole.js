@@ -26,6 +26,7 @@ module.exports = {
         };
 
         let inRoles = false;
+        let roleInfo = {};
         const embed = new EmbedBuilder();
 
         if (interaction.client.roles !== undefined) {
