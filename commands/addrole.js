@@ -15,22 +15,22 @@ module.exports = {
             .setDescription("The timout to disable the role pinging. DEFAULT: 1h")),
     async execute(interaction, args) {
 
-        let role = args.role;
-        let timeout = ms(args.timeout ?? "1h");
+        const role = args.role;
+        const timeoutInput = ms(args.timeout ?? "1h");
 
-        let newRole = {
-            timeout: timeout,
+        const newRole = {
+            timeout: timeoutInput,
             roleId: role,
             guildId: interaction.guild.id,
             underTimeout: false
         };
 
-        var inRoles = false;
-        var roleInfo;
+        let inRoles = false;
+        let roleInfo;
         const embed = new EmbedBuilder();
 
         if (interaction.client.roles != undefined) {
-            interaction.client.roles.forEach(async i => {
+            interaction.client.roles.forEach(i => {
                 if (newRole.roleId == i.roleId) {
                     inRoles = true;
                     roleInfo = i;
@@ -47,8 +47,8 @@ module.exports = {
             return;
         }
 
-        let theRole = await interaction.guild.roles.fetch(role);
-        let botRole = await interaction.guild.roles.botRoleFor(interaction.client.user);
+        const theRole = await interaction.guild.roles.fetch(role);
+        const botRole = await interaction.guild.roles.botRoleFor(interaction.client.user);
 
         if (theRole.comparePositionTo(botRole) > 0) {
             embed.setTitle("Cannot add role!")
@@ -80,7 +80,7 @@ module.exports = {
                 },
                 {
                     name: "> Timeout:",
-                    value: `${ms(timeout, { long: true })}`,
+                    value: `${ms(timeoutInput, { long: true })}`,
                     inline: true
                 }
             )

@@ -31,17 +31,17 @@ for (const file of commandFiles) {
     client.commands.set(command.data.name, command);
 }
 
-client.on('ready', async () => {
+client.on('ready', () => {
     console.log(`${client.user.tag} is online!`);
 
     setBotActivity(client.user);
 
-    client.roles.forEach(async (i) => {
+    client.roles.forEach((i) => {
         setTimeout(() => {
             if (i.underTimeout) {
-                client.guilds.fetch(i.guildId).then(async (guild) => {
+                client.guilds.fetch(i.guildId).then((guild) => {
                     if (guild.available) {
-                        guild.roles.fetch(i.roleId).then(async (role) => {
+                        guild.roles.fetch(i.roleId).then((role) => {
                             if (!role.mentionable) {
                                 role.setMentionable(true);
                                 i.underTimeout = false;
@@ -58,14 +58,14 @@ client.on('ready', async () => {
     setInterval(() => setBotActivity(client.user), 300000);
 });
 
-client.on('messageCreate', async (message) => {
+client.on('messageCreate', (message) => {
     if (message.author == client.user || message.author.bot) return;
     
-    let roleMentions = message.mentions.roles;
+    const roleMentions = message.mentions.roles;
 
     if (!message.member.permissions.has(PermissionFlagsBits.MentionEveryone)) {
-        roleMentions.forEach(async i => {
-            client.roles.forEach(async j => {
+        roleMentions.forEach(i => {
+            client.roles.forEach(j => {
                 if (i.id == j.roleId) {
                     if (!j.underTimeout) {
                         j.underTimeout = true;
@@ -86,7 +86,7 @@ client.on('interactionCreate', async (interaction) => {
 
     if (!command) return;
 
-    for (let option of interaction.options.data) {
+    for (const option of interaction.options.data) {
         if (option.value) args[option.name] = option.value;
     }
 
@@ -104,8 +104,8 @@ client.on('interactionCreate', async (interaction) => {
     }
 });
 
-client.on('roleDelete', async (role) => {
-    client.roles.forEach(async i => {
+client.on('roleDelete', (role) => {
+    client.roles.forEach(i => {
         if (i.roleId == role.id) {
             client.roles.splice(i, 1);
             saveRolesCache();
@@ -119,14 +119,14 @@ client.on('error', error => {
     console.error(error)
 });
 
-async function startPingTimeout(role) {
+function startPingTimeout(role) {
     try {
         role.setMentionable(false);
         console.log(`${role.name} was mentioned.\nStarting timeout...`);
 
-        client.roles.forEach(async (i) => {
+        client.roles.forEach((i) => {
             if (role.id == i.roleId) {
-                setTimeout(async () => {
+                setTimeout(() => {
                     role.setMentionable(true);
                     i.underTimeout = false;
                     saveRolesCache();
@@ -140,7 +140,7 @@ async function startPingTimeout(role) {
 }
 
 function setBotActivity(clientUser) {
-    let i = Math.floor(Math.random() * activities.length)
+    const i = Math.floor(Math.random() * activities.length)
     clientUser.setActivity(activities[i].text, { type: activities[i].type });
 }
 

@@ -14,17 +14,17 @@ module.exports = {
         .addStringOption(option => option.setName("timeout")
             .setDescription("The new timout length. DEFAULT: 1h")
             .setRequired(true)),
-    async execute(interaction, args) {
-        let role = args.role;
-        let timeout = args.timeout;
+    execute(interaction, args) {
+        const role = args.role;
+        const timeout = args.timeout;
         let noChange = false;
-        let oldTimeout;
-        let newTimeout;
+        let oldTimeout = ms("1h");
+        let newTimeout = ms("1h");
         let inRoles = false;
-        let theRole;
+        let theRole = {};
         let index = 0;
         
-        for (let blob of interaction.client.roles) {
+        for (const blob of interaction.client.roles) {
             if (blob.roleId == role) {
                 inRoles = true;
                 theRole = blob;

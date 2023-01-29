@@ -7,7 +7,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("shutdown")
         .setDescription("Shutdown the bot."),
-    async execute(interaction, args) {
+    execute(interaction, args) { // skipcq: JS-0128
         const embed = new EmbedBuilder();
         if (interaction.user.id != ownerId) {
             embed.setImage(memberDeny)

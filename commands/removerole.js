@@ -12,15 +12,14 @@ module.exports = {
             .setRequired(true)),
     async execute(interaction, args) {
 
-        let role = args.role;
+        const role = args.role;
         const embed = new EmbedBuilder();
-        let theRole;
         let index = 0;
         let inRoles = false;
-        for (let blob of interaction.client.roles) {
+        let guildRole = await interaction.guild.roles.fetch(role);
+        for (const blob of interaction.client.roles) {
             if (blob.roleId == role) {
                 inRoles = true;
-                theRole = blob;
                 index = interaction.client.roles.indexOf(blob);
                 break;
             }
@@ -32,14 +31,13 @@ module.exports = {
                 .setColor(rejectColor)
                 .setTimestamp();
 
-            interaction.reply({ embeds: [reject], ephemeral: true });
+            interaction.reply({ embeds: [embed], ephemeral: true });
             return;
         }
 
         interaction.client.roles.splice(index, 1);
         saveRolesCache(interaction.client.roles);
 
-        var guildRole = await interaction.guild.roles.fetch(role);
         if (!guildRole.mentionable) guildRole.setMentionable(true);
 
         embed.setTitle("Role removed!")

@@ -7,9 +7,8 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("about")
         .setDescription("What is P3 Timer?"),
-    async execute(interaction, args) {
-        let i = 0;
-        interaction.client.roles.forEach(async j => i++);
+    execute(interaction, args) { // skipcq: JS-0128
+        let i = interaction.client.roles.length;
 
         const embed = new EmbedBuilder()
             .setTitle(interaction.client.user.username)
@@ -44,17 +43,17 @@ module.exports = {
 }
 
 function getUptimeString() {
-    let lSecs = uptime();
-    let lMins = Math.floor(lSecs / 60);
-    let rSecs = lSecs - (lMins * 60) ?? 0;
-    let lHrs = Math.floor(lMins / 60);
-    let rMins = lMins - (lHrs * 60) ?? 0;
-    let lDays = Math.floor(lHrs / 24);
-    let rHrs = lHrs - (lDays * 24) ?? 0;
+    const lSecs = uptime();
+    const lMins = Math.floor(lSecs / 60);
+    const rSecs = lSecs - (lMins * 60) ?? 0;
+    const lHrs = Math.floor(lMins / 60);
+    const rMins = lMins - (lHrs * 60) ?? 0;
+    const lDays = Math.floor(lHrs / 24);
+    const rHrs = lHrs - (lDays * 24) ?? 0;
 
-    let days = lDays > 0 ? `${lDays}day${lDays > 1 ? "s" : ""} ` : "";
-    let hrs = rHrs > 0 ? `${rHrs}hr${rHrs > 1 ? "s" : ""} ` : "";
-    let mins = rMins > 0 ? `${rMins}min${rMins > 1 ? "s" : ""} ` : "";
+    const days = lDays > 0 ? `${lDays}day${lDays > 1 ? "s" : ""} ` : "";
+    const hrs = rHrs > 0 ? `${rHrs}hr${rHrs > 1 ? "s" : ""} ` : "";
+    const mins = rMins > 0 ? `${rMins}min${rMins > 1 ? "s" : ""} ` : "";
 
     return `${days}${hrs}${mins}${Math.floor(rSecs)}sec${rSecs > 1 ? "s" : ""}`;
 }
