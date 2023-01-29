@@ -7,7 +7,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("about")
         .setDescription("What is P3 Timer?"),
-    execute(interaction, args) { // skipcq: JS-0128
+    execute(interaction, _args) {
         const i = interaction.client.roles.length;
 
         const embed = new EmbedBuilder()

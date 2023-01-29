@@ -56,7 +56,7 @@ module.exports = {
         } else {
             oldTimeout = theRole.timeout;
             noChange = true;
-        };
+        }
 
         if (!noChange) {
             embed.setTitle("Role updated!")
