@@ -4,6 +4,6 @@ version = 1
 name = "javascript"
 
     [analyzers.meta]
-        enviroment = ["nodejs"]
+        environment = ["nodejs"]
         module_system = "commonjs"
-        style-guide = "standard"
+        style_guide = "standard"
