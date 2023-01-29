@@ -66,7 +66,7 @@ client.on('messageCreate', (message) => {
     if (!message.member.permissions.has(PermissionFlagsBits.MentionEveryone)) {
         roleMentions.forEach(i => {
             client.roles.forEach(j => {
-                if (i.id == j.roleId) {
+                if (i.id === j.roleId) {
                     if (!j.underTimeout) {
                         j.underTimeout = true;
                         saveRolesCache();
@@ -106,7 +106,7 @@ client.on('interactionCreate', async (interaction) => {
 
 client.on('roleDelete', (role) => {
     client.roles.forEach(i => {
-        if (i.roleId == role.id) {
+        if (i.roleId === role.id) {
             client.roles.splice(i, 1);
             saveRolesCache();
 
@@ -125,7 +125,7 @@ function startPingTimeout(role) {
         console.log(`${role.name} was mentioned.\nStarting timeout...`);
 
         client.roles.forEach((i) => {
-            if (role.id == i.roleId) {
+            if (role.id === i.roleId) {
                 setTimeout(() => {
                     role.setMentionable(true);
                     i.underTimeout = false;

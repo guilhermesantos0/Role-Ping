@@ -8,7 +8,7 @@ module.exports = {
         .setName("about")
         .setDescription("What is P3 Timer?"),
     execute(interaction, args) { // skipcq: JS-0128
-        let i = interaction.client.roles.length;
+        const i = interaction.client.roles.length;
 
         const embed = new EmbedBuilder()
             .setTitle(interaction.client.user.username)

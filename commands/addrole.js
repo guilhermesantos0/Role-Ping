@@ -26,12 +26,11 @@ module.exports = {
         };
 
         let inRoles = false;
-        let roleInfo;
         const embed = new EmbedBuilder();
 
-        if (interaction.client.roles != undefined) {
+        if (interaction.client.roles !== undefined) {
             interaction.client.roles.forEach(i => {
-                if (newRole.roleId == i.roleId) {
+                if (newRole.roleId === i.roleId) {
                     inRoles = true;
                     roleInfo = i;
                 };

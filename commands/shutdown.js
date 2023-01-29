@@ -9,7 +9,7 @@ module.exports = {
         .setDescription("Shutdown the bot."),
     execute(interaction, args) { // skipcq: JS-0128
         const embed = new EmbedBuilder();
-        if (interaction.user.id != ownerId) {
+        if (interaction.user.id !== ownerId) {
             embed.setImage(memberDeny)
                 .setTimestamp()
                 .setColor(rejectColor);

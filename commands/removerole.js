@@ -16,9 +16,9 @@ module.exports = {
         const embed = new EmbedBuilder();
         let index = 0;
         let inRoles = false;
-        let guildRole = await interaction.guild.roles.fetch(role);
+        const guildRole = await interaction.guild.roles.fetch(role);
         for (const blob of interaction.client.roles) {
-            if (blob.roleId == role) {
+            if (blob.roleId === role) {
                 inRoles = true;
                 index = interaction.client.roles.indexOf(blob);
                 break;

@@ -25,7 +25,7 @@ module.exports = {
         let index = 0;
         
         for (const blob of interaction.client.roles) {
-            if (blob.roleId == role) {
+            if (blob.roleId === role) {
                 inRoles = true;
                 theRole = blob;
                 index = interaction.client.roles.indexOf(blob);
@@ -47,7 +47,7 @@ module.exports = {
             return;
         }
 
-        if (theRole.timeout != ms(timeout)) {
+        if (theRole.timeout !== ms(timeout)) {
             oldTimeout = theRole.timeout;
             theRole.timeout = ms(timeout);
             newTimeout = theRole.timeout;
